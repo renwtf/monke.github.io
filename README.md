@@ -1,23 +1,20 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Please Forgive Me ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#ffd6e7,#ffeef5);
-    min-height:100vh;
+    background:linear-gradient(135deg,#ffd6e7,#fff0f5);
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -26,38 +23,40 @@ body{
 
 .container{
     text-align:center;
-    padding:30px;
-    max-width:700px;
+    padding:20px;
+    max-width:600px;
 }
 
-img{
-    width:220px;
-    margin-bottom:20px;
+.gif{
+    width:250px;
     border-radius:20px;
+    margin-bottom:20px;
 }
 
 h1{
-    color:#ff3d7f;
+    color:#ff4d8d;
     margin-bottom:15px;
 }
 
-p{
-    font-size:1.1rem;
+.message{
+    font-size:20px;
     color:#555;
+    margin-bottom:30px;
 }
 
 .buttons{
-    margin-top:30px;
-    position:relative;
+    display:flex;
+    justify-content:center;
+    gap:15px;
 }
 
 button{
     border:none;
-    padding:15px 35px;
+    padding:15px 30px;
     border-radius:15px;
-    font-size:1.1rem;
     cursor:pointer;
-    transition:.25s;
+    font-size:18px;
+    transition:0.25s;
 }
 
 #yesBtn{
@@ -68,12 +67,12 @@ button{
 #noBtn{
     background:#ff4d6d;
     color:white;
-    margin-left:15px;
 }
 
-.floating-heart{
+.heart{
     position:fixed;
-    animation:floatUp 4s linear forwards;
+    bottom:-50px;
+    animation:floatUp 5s linear forwards;
 }
 
 @keyframes floatUp{
@@ -92,19 +91,21 @@ button{
 
 <div class="container">
 
-    <!-- Replace with your own photo/GIF -->
-    <img src="https://media.tenor.com/0AVbKGY_MxMAAAAC/cute-bear.gif">
+    <img
+    class="gif"
+    src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnRpNGFuNjl3bHg1eTY3enlrajFuYXhoMzZ2Y3JoNmlkYmczN2c4eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/oi1iF8VmRGo9nHTPl8/giphy.gif"
+    alt="cute bear">
 
-    <h1 id="title">I'm Really Sorry ❤️</h1>
+    <h1>I'm Sorry ❤️</h1>
 
-    <p id="message">
-        I know I messed up and I genuinely feel bad about it.
-        You mean a lot to me.
+    <p class="message">
+        I know I havent been the best and I'm genuinely sorry.
+        Will you forgive me?
     </p>
 
     <div class="buttons">
-        <button id="yesBtn">I Forgive You ❤️</button>
-        <button id="noBtn">No 😤</button>
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 💔</button>
     </div>
 
 </div>
@@ -113,45 +114,49 @@ button{
 
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("message");
 
-const texts = [
-"Are you sure? 🥺",
-"Really sure? 😭",
-"Please think again ❤️",
-"I'll buy you snacks 🍫",
-"I'll send you memes 🥹",
-"You're my favorite person 😭",
-"Don't do this to me 😔",
-"Last chance 😭❤️",
-"Pretty please? 🥺",
-"Okay now you're just being mean 😭"
+const noMessages = [
+"Pakka",
+"Really sure?",
+"Think abt ittt",
+"PLEAASSEEEEE", 
+"PRETTYYY PLEAASSEE",
+"I'll buy you icecreamm bebe",
+"I'll send over some cookieess?",
+"You're my favourite personn :(",
+"MWUAAHAHH ILL GIV KISSIES",
+"NNOOOOOOOOOH",
+"MONKEYYYYYYY PLEAASEEUHH"
 ];
 
-let count = 0;
-let scale = 1;
+let clickCount = 0;
+let yesScale = 1;
 
 function moveNoButton(){
 
-    message.textContent = texts[Math.min(count,texts.length-1)];
+    noBtn.innerText =
+        noMessages[Math.min(clickCount, noMessages.length - 1)];
 
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 100);
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
     noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
 
-    scale += 0.18;
-    yesBtn.style.transform = `scale(${scale})`;
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
-    count++;
+    clickCount++;
 }
 
-noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("mouseenter", moveNoButton);
 noBtn.addEventListener("click", moveNoButton);
 
-yesBtn.addEventListener("click", ()=>{
+yesBtn.addEventListener("click", () => {
 
 document.body.innerHTML = `
 <div style="
@@ -162,57 +167,61 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:30px;
-background:linear-gradient(135deg,#ffd6e7,#fff0f7);
-font-family:Poppins;
+background:linear-gradient(135deg,#ffd6e7,#fff0f5);
 ">
-<h1 style="font-size:4rem;color:#ff3d7f;">
-YAYYYYY ❤️
+
+<img
+style="width:280px;border-radius:20px;"
+src="https://media.tenor.com/5Vq4K8A6vTMAAAAC/bear-love.gif">
+
+<h1 style="
+font-size:60px;
+color:#ff4d8d;
+margin-top:20px;">
+WOOOOOOHH :P
 </h1>
 
 <h2 style="margin-top:10px;">
-Thank you for forgiving me 🥺
+I will try to be better bebe.
 </h2>
 
 <p style="
 max-width:600px;
 margin-top:20px;
-font-size:1.1rem;
-line-height:1.8;
-">
-I know I won't always be perfect,
-but I promise I'll always care about you,
-listen to you, and keep trying to be better.
-❤️
+font-size:20px;
+line-height:1.8;">
+I know I mess up a lot,
+but I really do care about you more than i can describe.
+I hope you can forgive me and i'll do my best to make it up to you jaan.
 </p>
 
-<h3 style="margin-top:25px;">
-Love You 💕
-</h3>
 </div>
 `;
 
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.className="floating-heart";
-heart.innerHTML="❤️";
+setInterval(() => {
 
-heart.style.left=Math.random()*window.innerWidth+"px";
-heart.style.bottom="-50px";
-heart.style.fontSize=(20+Math.random()*40)+"px";
+const heart = document.createElement("div");
+
+heart.classList.add("heart");
+heart.innerHTML = "❤️";
+
+heart.style.left =
+Math.random() * window.innerWidth + "px";
+
+heart.style.fontSize =
+(20 + Math.random() * 40) + "px";
 
 document.body.appendChild(heart);
 
-setTimeout(()=>{
+setTimeout(() => {
 heart.remove();
-},4000);
+}, 5000);
 
-},120);
+}, 120);
 
 });
 
 </script>
 
-</body>
-</html>
 </body>
 </html>
