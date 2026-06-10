@@ -159,79 +159,105 @@ noBtn.addEventListener("click", moveNoButton);
 yesBtn.addEventListener("click", () => {
 
 document.body.innerHTML = `
-<div style="
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:30px;
-background:linear-gradient(135deg,#ffd6e7,#fff0f5);
-">
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+}
 
-<img
-style="width:280px;border-radius:20px;"
-src="https://media.tenor.com/5Vq4K8A6vTMAAAAC/bear-love.gif">
+#celebration{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+    background:linear-gradient(135deg,#ffd6e7,#fff0f5);
+}
 
-<h1 style="
-font-size:60px;
-color:#ff4d8d;
-margin-top:20px;">
-WOOOOOOHH :P
-</h1>
+#heart-container{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:9999;
+}
 
-<h2 style="margin-top:10px;">
-I will try to be better bebe.
-</h2>
+.heart{
+    position:absolute;
+    animation:floatUp 4s linear forwards;
+}
 
-<p style="
-max-width:600px;
-margin-top:20px;
-font-size:20px;
-line-height:1.8;">
-I know I mess up a lot,
-but I really do care about you more than i can describe.
-I hope you can forgive me and i'll do my best to make it up to you jaan.
-</p>
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+</style>
+
+<div id="celebration">
+
+    <img
+    style="width:280px;border-radius:20px;"
+    src="https://media.tenor.com/5Vq4K8A6vTMAAAAC/bear-love.gif">
+
+    <h1 style="
+    font-size:60px;
+    color:#ff4d8d;
+    margin-top:20px;">
+    WOOOOOOHH :P
+    </h1>
+
+    <h2 style="margin-top:10px;">
+    I will try to be better bebe.
+    </h2>
+
+    <p style="
+    max-width:600px;
+    margin-top:20px;
+    font-size:20px;
+    line-height:1.8;">
+    I know I mess up a lot,
+    but I really do care about you more than i can describe.
+    I hope you can forgive me and i'll do my best to make it up to you jaan.
+    </p>
 
 </div>
+
+<div id="heart-container"></div>
 `;
+
+const heartContainer = document.getElementById("heart-container");
 
 setInterval(() => {
 
     const heart = document.createElement("div");
 
+    heart.className = "heart";
     heart.innerHTML = "❤️";
 
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.bottom = "-50px";
-    heart.style.fontSize = (20 + Math.random() * 40) + "px";
-    heart.style.pointerEvents = "none";
-    heart.style.zIndex = "9999";
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.bottom = "-30px";
+    heart.style.fontSize = (20 + Math.random() * 25) + "px";
 
-    document.body.appendChild(heart);
+    heartContainer.appendChild(heart);
 
-    let pos = -50;
-    let opacity = 1;
+    setTimeout(() => {
+        heart.remove();
+    }, 4000);
 
-    const float = setInterval(() => {
-        pos += 3;
-        opacity -= 0.005;
+}, 200);
 
-        heart.style.bottom = pos + "px";
-        heart.style.opacity = opacity;
-
-        if (pos > window.innerHeight + 100) {
-            clearInterval(float);
-            heart.remove();
-        }
-    }, 16);
-
-}, 120);
-    
 });
+    
 
 </script>
 
