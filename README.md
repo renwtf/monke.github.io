@@ -200,25 +200,37 @@ I hope you can forgive me and i'll do my best to make it up to you jaan.
 
 setInterval(() => {
 
-const heart = document.createElement("div");
+    const heart = document.createElement("div");
 
-heart.classList.add("heart");
-heart.innerHTML = "❤️";
+    heart.innerHTML = "❤️";
 
-heart.style.left =
-Math.random() * window.innerWidth + "px";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "-50px";
+    heart.style.fontSize = (20 + Math.random() * 40) + "px";
+    heart.style.pointerEvents = "none";
+    heart.style.zIndex = "9999";
 
-heart.style.fontSize =
-(20 + Math.random() * 40) + "px";
+    document.body.appendChild(heart);
 
-document.body.appendChild(heart);
+    let pos = -50;
+    let opacity = 1;
 
-setTimeout(() => {
-heart.remove();
-}, 5000);
+    const float = setInterval(() => {
+        pos += 3;
+        opacity -= 0.005;
+
+        heart.style.bottom = pos + "px";
+        heart.style.opacity = opacity;
+
+        if (pos > window.innerHeight + 100) {
+            clearInterval(float);
+            heart.remove();
+        }
+    }, 16);
 
 }, 120);
-
+    
 });
 
 </script>
